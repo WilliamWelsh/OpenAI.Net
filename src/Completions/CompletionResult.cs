@@ -111,7 +111,7 @@ namespace OpenAI
 		public List<string> Tokens { get; set; }
 
 		[JsonProperty("token_logprobs")]
-		public List<double> TokenLogprobs { get; set; }
+		public List<double?> TokenLogprobs { get; set; }
 
 		[JsonProperty("top_logprobs")]
 		public IList<IDictionary<string, double>> TopLogprobs { get; set; }
