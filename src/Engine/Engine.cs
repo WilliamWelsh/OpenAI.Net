@@ -84,10 +84,21 @@ namespace OpenAI
 		/// The 2nd most powerful engine, a bit faster than <see cref=Davinci"/>, and a bit faster.
 		/// </summary>
 		public static Engine Curie => new Engine("curie") { Owner = "openai", Ready = true };
+
 		/// <summary>
-		/// The most powerful, largest engine available, although the speed is quite slow.
+		/// The instruct version of <see cref="Curie"/> engine.
 		/// </summary>
+		public static Engine CurieInstructBeta => new Engine("curie-instruct-beta") { Owner = "openai", Ready = true };
+
+        /// <summary>
+        /// The most powerful, largest engine available, although the speed is quite slow.
+        /// </summary>
 		public static Engine Davinci => new Engine("davinci") { Owner = "openai", Ready = true };
+
+		/// <summary>
+		/// The instruct version of <see cref="Davinci"/> engine.
+		/// </summary>
+		public static Engine DavinciInstructBeta => new Engine("davinci-instruct-beta") { Owner = "openai", Ready = true };
 
 		/// <summary>
 		/// The default Engine to use in the case no other is specified.  Defaults to <see cref="Davinci"/>
