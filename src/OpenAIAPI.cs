@@ -36,7 +36,8 @@ namespace OpenAI
 			Completions = new CompletionEndpoint(this);
 			Engines = new EnginesEndpoint(this);
 			Search = new SearchEndpoint(this);
-		}
+			Answers = new AnswerEndpoint(this);
+        }
 
 		/// <summary>
 		/// Text generation is the core function of the API. You give the API a prompt, and it generates a completion. The way you “program” the API to do a task is by simply describing the task in plain english or providing a few written examples. This simple approach works for a wide range of use cases, including summarization, translation, grammar correction, question answering, chatbots, composing emails, and much more (see the prompt library for inspiration).
@@ -53,9 +54,9 @@ namespace OpenAI
 		/// </summary>
 		public SearchEndpoint Search { get; }
 
-
-
-
-
+		/// <summary>
+		/// Given a question, a set of documents, and some examples, the API generates an answer to the question based on the information in the set of documents. This is useful for question-answering applications on sources of truth, like company documentation or a knowledge base.
+		/// </summary>
+		public AnswerEndpoint Answers { get; }
 	}
 }

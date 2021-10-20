@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>_02_Searches</RootNamespace>
+    <RootNamespace>_03_Classifications</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -140,7 +140,7 @@ namespace OpenAI
 		}
 
 		/// <summary>
-		/// Cretes a new, empty <see cref="CompletionRequest"/>
+		/// Creates a new, empty <see cref="CompletionRequest"/>
 		/// </summary>
 		public CompletionRequest()
 		{
