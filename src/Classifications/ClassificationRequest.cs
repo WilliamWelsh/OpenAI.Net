@@ -53,7 +53,7 @@ namespace OpenAI
         /// <summary>
         /// Creates a new <see cref="ClassificationRequest"/> with the specified parameters
         /// </summary>
-        public ClassificationRequest(string query, string model, List<List<string>> examples = null, List<string> labels = null, string searchModel = null)
+        public ClassificationRequest(string query, Engine model, List<List<string>>? examples = null, List<string>? labels = null, Engine? searchModel = null)
         {
             this.Query = query;
             this.Model = model;

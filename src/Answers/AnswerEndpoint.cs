@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Authentication;
 using System.Text;
@@ -55,13 +56,6 @@ namespace OpenAI
             }
 
             throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode + ". Request body: " + jsonContent);
-        }
-
-        public Task<AnswerResult> CreateAnswerAsync(string question, string[][] examples, string examplesContext)
-        {
-            var request = new AnswerRequest(question, examples, examplesContext);
-
-            return CreateAnswerAsync(request);
         }
     }
 }

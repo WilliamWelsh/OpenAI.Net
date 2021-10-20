@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace OpenAI
 {
@@ -24,7 +25,7 @@ namespace OpenAI
         /// the tone and answer format you'd like. OpenAI recommends adding 2 to 3 examples.
         /// </summary>
         [JsonProperty("examples")]
-        public string[][] Examples { get; set; }
+        public List<List<string>> Examples { get; set; }
 
         /// <summary>
         /// A text snippet containing the contextual information used to generate the answers for the examples you provide.
@@ -38,13 +39,13 @@ namespace OpenAI
         /// on the question-answer examples.
         /// </summary>
         [JsonProperty("documents")]
-        public string[] Documents { get; set; }
+        public List<string>? Documents { get; set; }
 
         /// <summary>
         /// ID of the engine to use for Search.
         /// </summary>
         [JsonProperty("search_model")]
-        public string SearchModel { get; set; }
+        public string? SearchModel { get; set; }
 
         /// <summary>
         /// What sampling temperature to use.
@@ -58,30 +59,36 @@ namespace OpenAI
         /// The maximum number of tokens allowed for the generated answer.
         /// </summary>
         [JsonProperty("max_tokens")]
-        public long MaxTokens { get; set; }
+        public int? MaxTokens { get; set; }
 
         /// <summary>
         /// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
         /// </summary>
         [JsonProperty("stop")]
-        public string[] Stop { get; set; }
+        public List<string>? Stop { get; set; }
 
         /// <summary>
         /// Creates a new, empty <see cref="AnswerRequest"/>
         /// </summary>
         public AnswerRequest()
         {
-            Model = "curie";
-            Stop = new [] { "\n", "<|endoftext|>" };
+            
         }
 
-        public AnswerRequest(string question, string[][] examples, string examplesContext)
+        /// <summary>
+        /// Creates a new <see cref="AnswerRequest"/> with the specified parameters
+        /// </summary>
+        public AnswerRequest(Engine model, string question, List<List<string>> examples, string examplesContext, List<string>? documents = null, Engine? searchModel = null, double? temperature = null, int? maxTokens = null, List<string>? stop = null)
         {
-            Model = "curie";
-            Question = question;
-            Examples = examples;
-            ExamplesContext = examplesContext;
-            Stop = new [] { "\n", "<|endoftext|>" };
+            this.Model = model;
+            this.Question = question;
+            this.Examples = examples;
+            this.ExamplesContext = examplesContext;
+            this.Documents = documents;
+            this.SearchModel = searchModel;
+            this.Temperature = temperature;
+            this.MaxTokens = maxTokens;
+            this.Stop = stop;
         }
 
         public AnswerRequest(AnswerRequest basedOn)

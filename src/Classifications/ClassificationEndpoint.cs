@@ -56,12 +56,5 @@ namespace OpenAI
 
             throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode + ". Request body: " + jsonContent);
         }
-
-        public Task<ClassificationResult> CreateClassificationAsync()
-        {
-            var request = new ClassificationRequest();
-
-            return CreateClassificationAsync(request);
-        }
     }
 }

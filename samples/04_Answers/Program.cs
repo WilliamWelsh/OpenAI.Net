@@ -1,6 +1,7 @@
 ﻿using OpenAI;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace _04_Answers
 {
@@ -15,21 +16,25 @@ namespace _04_Answers
 
             // Set up a search request
             // https://beta.openai.com/docs/api-reference/searches
-            var request = new AnswerRequest
-            {
-                Question = "which puppy is happy?",
-                Examples = new[]
+            var request = new AnswerRequestBuilder()
+                .WithDocuments(new List<string>
                 {
-                    new [] { "What is human life expectancy in the United States?", "78 years." }
-                },
-                ExamplesContext = "In 2017, U.S. life expectancy was 78.6 years.",
-                Documents = new []
+                    "Puppy A is happy.", "Puppy B is sad."
+                })
+                .WithQuestion("which puppy is happy?")
+                .WithSearchModel(Engine.Ada)
+                .WithModel(Engine.Curie)
+                .WithExamplesContext("In 2017, U.S. life expectancy was 78.6 years.")
+                .WithExamples(new List<List<string>>
                 {
-                    "Puppy A is happy.",
-                    "Puppy B is sad."
-                },
-                MaxTokens = 5
-            };
+                    new List<string> { "What is human life expectancy in the United States?", "78 years." }
+                })
+                .WithMaxTokens(5)
+                .WithStop(new List<string>
+                {
+                    "\n", "<|endoftext|>"
+                })
+                .Build();
 
             // Send the request & get the best match
             // To get the score of the result, use GetBestMatchWithScoreAsync(request)
@@ -37,6 +42,8 @@ namespace _04_Answers
 
             // Print the result
             Console.WriteLine(result.Answers[0]);
+
+            // Should print something like "puppy A."
         }
     }
 }

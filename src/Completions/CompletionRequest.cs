@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Linq;
+﻿using System.Linq;
+using Newtonsoft.Json;
 
 namespace OpenAI
 {
@@ -15,12 +15,11 @@ namespace OpenAI
 		public object CompiledPrompt
 		{
 			get
-			{
-				if (MultiplePrompts?.Length == 1)
+            {
+                if (MultiplePrompts?.Length == 1)
 					return Prompt;
-				else
-					return MultiplePrompts;
-			}
+                return MultiplePrompts;
+            }
 		}
 
 		/// <summary>

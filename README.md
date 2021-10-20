@@ -98,21 +98,25 @@ Given a question, a set of documents, and some examples, the API generates an an
 ```csharp
 var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
 
-var request = new AnswerRequest
-{
-	Question = "which puppy is happy?",
-	Examples = new[]
-	{
-	    new [] { "What is human life expectancy in the United States?", "78 years." }
-	},
-	ExamplesContext = "In 2017, U.S. life expectancy was 78.6 years.",
-	Documents = new []
-	{
-	    "Puppy A is happy.",
-	    "Puppy B is sad."
-	},
-	MaxTokens = 5
-};
+var request = new AnswerRequestBuilder()
+    .WithDocuments(new List<string>
+    {
+    	"Puppy A is happy.", "Puppy B is sad."
+    })
+    .WithQuestion("which puppy is happy?")
+    .WithSearchModel(Engine.Ada)
+    .WithModel(Engine.Curie)
+    .WithExamplesContext("In 2017, U.S. life expectancy was 78.6 years.")
+    .WithExamples(new List<List<string>>
+    {
+    	new List<string> { "What is human life expectancy in the United States?", "78 years." }
+    })
+    .WithMaxTokens(5)
+    .WithStop(new List<string>
+    {
+    	"\n", "<|endoftext|>"
+    })
+    .Build();
 
 var result = await api.Answers.CreateAnswerAsync(request);
 Console.WriteLine(result.Answers[0]);
