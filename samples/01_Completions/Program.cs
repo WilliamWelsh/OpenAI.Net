@@ -13,18 +13,19 @@ namespace _01_Completions
             // Initialize the API
             var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
 
-            // Create a completion request
+            // Set up a search request
             // https://beta.openai.com/docs/api-reference/completions
-            var request = new CompletionRequest
-            {
-                Prompt = "Once upon a time",
-                MaxTokens = 5
-            };
+            var request = new CompletionRequestBuilder()
+                .WithPrompt("Once upon a time")
+                .WithMaxTokens(5)
+                .Build();
 
             var result = await api.Completions.CreateCompletionAsync(request);
 
             // Print the result
             Console.WriteLine(result.ToString());
+
+            // Should print something like ", there was a girl who"
         }
     }
 }

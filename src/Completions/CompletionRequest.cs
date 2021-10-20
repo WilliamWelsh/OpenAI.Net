@@ -9,7 +9,7 @@ namespace OpenAI
 	public class CompletionRequest
 	{
 		/// <summary>
-		/// This is only used for serializing the request into JSON, do not use it directly.
+		/// The prompt(s) to generate completions for, encoded as a string, a list of strings, or a list of token lists.
 		/// </summary>
 		[JsonProperty("prompt")]
 		public object CompiledPrompt
@@ -43,7 +43,7 @@ namespace OpenAI
 		}
 
 		/// <summary>
-		/// How many tokens to complete to. Can return fewer if a stop sequence is hit.
+		/// The maximum number of tokens to generate in the completion.
 		/// </summary>
 		[JsonProperty("max_tokens")]
 		public int? MaxTokens { get; set; }
