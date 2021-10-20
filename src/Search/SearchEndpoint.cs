@@ -25,8 +25,6 @@ namespace OpenAI
 			this.Api = api;
 		}
 
-
-
 		#region GetSearchResults
 		/// <summary>
 		/// Perform a semantic search over a list of documents
