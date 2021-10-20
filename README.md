@@ -68,7 +68,32 @@ Console.WriteLine(result);
 ```
 
 ### Classifications
-Coming soon. Feel free to make a pull request.
+Given a query and a set of labeled examples, the model will predict the most likely label for the query. Useful as a drop-in replacement for any ML classification or text-to-label task. [View on OpenAI](https://beta.openai.com/docs/api-reference/classifications).  
+
+```csharp
+var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
+
+var request = new ClassificationRequest
+{
+    Examples = new []
+    {
+        new [] { "A happy moment", "Positive" },
+        new [] { "I am sad.", "Negative" },
+        new [] { "I am feeling awesome", "Positive" }
+    },
+    Labels = new []
+    {
+    	"Positive", "Negative", "Neutral"
+    },
+    Query = "It is a raining day :(",
+    SearchModel = "ada",
+    Model = "curie"
+};
+
+var result = await api.Classifications.CreateClassificationAsync(request);
+Console.WriteLine(result.Label);
+// Should print "Negative"
+```
 
 ### Answers
 Given a question, a set of documents, and some examples, the API generates an answer to the question based on the information in the set of documents. This is useful for question-answering applications on sources of truth, like company documentation or a knowledge base. [View on OpenAI](https://beta.openai.com/docs/api-reference/answers).  

@@ -28,6 +28,7 @@
 			Engines = new EnginesEndpoint(this);
 			Search = new SearchEndpoint(this);
 			Answers = new AnswerEndpoint(this);
+            Classifications = new ClassificationEndpoint(this);
         }
 
 		/// <summary>
@@ -49,5 +50,10 @@
 		/// Given a question, a set of documents, and some examples, the API generates an answer to the question based on the information in the set of documents. This is useful for question-answering applications on sources of truth, like company documentation or a knowledge base.
 		/// </summary>
 		public AnswerEndpoint Answers { get; }
+
+		/// <summary>
+		/// Given a query and a set of labeled examples, the model will predict the most likely label for the query. Useful as a drop-in replacement for any ML classification or text-to-label task.
+		/// </summary>
+		public ClassificationEndpoint Classifications { get; }
 	}
 }
