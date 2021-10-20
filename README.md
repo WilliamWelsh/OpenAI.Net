@@ -1,6 +1,8 @@
-# OpenAI.Net
+<h1 align="center">
+OpenAI.Net
+</h1>
 
-An unofficial .NET API wrapper for OpenAI.  
+<h4 align="center">An unofficial .NET API wrapper for OpenAI.</h4>
 
 ## Authentication
 There are 3 ways to provide your API keys, in order of precedence:
@@ -8,25 +10,25 @@ There are 3 ways to provide your API keys, in order of precedence:
 2.  Set environment var for OPENAI_KEY
 3.  Include a config file in the local directory or in your user directory named `.openai` and containing the line:
 ```shell
-OPENAI_KEY=sk-aaaabbbbbccccddddd
+OPENAI_KEY=sk-yourapikey
 ```
 
 You use the `APIAuthentication` when you initialize the API as shown:
 ```csharp
-var api = new OpenAIAPI("YOUR_API_KEY_HERE"); // shorthand
+var api = new OpenAIAPI("YOUR_API_KEY_HERE");
 // or
-var api = new OpenAIAPI(new APIAuthentication("sk-secretkey")); // create object manually
+var api = new OpenAIAPI(new APIAuthentication("sk-yourapikey")); // create object manually
 // or
 var api = new OpenAIAPI(APIAuthentication LoadFromEnv()); // use env vars
 // or
-var api = new OpenAIAPI(APIAuthentication LoadFromPath()); // use config file (can optionally specify where to look)
+var api = new OpenAIAPI(APIAuthentication LoadFromPath()); // use config file (optionally specify where to look)
 // or
 var api = new OpenAIAPI(); // uses default, env, or config file
 ```
 
 ## Examples
 
-You can view built examples in the [/samples](https://github.com/WilliamWelsh/OpenAI.Net/tree/main/samples) folder.  
+You can view built examples in the [samples](https://github.com/WilliamWelsh/OpenAI.Net/tree/main/samples) folder.  
 
 ### Completions
 Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position. [View on OpenAI](https://beta.openai.com/docs/api-reference/completions).  
@@ -189,7 +191,7 @@ Each of those methods has similar convenience overloads to specify the request i
 
 ## Documentation
 
-Every single class, method, and property has extensive XML documentation, so it should show up automatically in IntelliSense.  That combined with the official OpenAI documentation should be enough to get started.  Feel free to add me on Discord Reverse#0069 if you have any questions.  Better documentation may come later.
+View the documentation on [OpenAI](https://beta.openai.com/docs/introduction/overview). Feel free to add me on Discord Reverse#0069 if you have any questions. Better documentation may come later.
 
 ## Credits
-OkGoDoIt - Original [fork](https://github.com/OkGoDoIt/OpenAI-API-dotnet) from December 22, 2020.
+OkGoDoIt - Original [fork](https://github.com/OkGoDoIt/OpenAI-API-dotnet/tree/e07bfe2ddeea40380beb923f36fca9853830d7d7) from December 22, 2020.
