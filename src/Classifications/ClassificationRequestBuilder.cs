@@ -2,7 +2,7 @@
 {
     public class ClassificationRequestBuilder
     {
-        public string Model { get; set; }
+        public Engine Model { get; set; }
 
         public string Query { get; set; }
 
@@ -10,12 +10,12 @@
 
         public string[]? Labels { get; set; }
 
-        public string? SearchModel { get; set; }
+        public Engine? SearchModel { get; set; }
 
         /// <summary>
         /// ID of the engine to use for completion.
         /// </summary>
-        public ClassificationRequestBuilder WithModel(string model)
+        public ClassificationRequestBuilder WithModel(Engine model)
         {
             Model = model;
             return this;
@@ -55,7 +55,7 @@
         /// <summary>
         /// ID of the engine to use for Search. Defaults to ada.
         /// </summary>
-        public ClassificationRequestBuilder WithSearchModel(string searchModel)
+        public ClassificationRequestBuilder WithSearchModel(Engine searchModel)
         {
             SearchModel = searchModel;
             return this;

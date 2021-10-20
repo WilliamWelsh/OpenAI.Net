@@ -83,8 +83,8 @@ var request = new ClassificationRequestBuilder()
     	"Positive", "Negative", "Neutral"
     })
     .WithQuery("It is a raining day :(")
-    .WithSearchModel("ada")
-    .WithModel("curie")
+    .WithSearchModel(Engine.Ada)
+    .WithModel(Engine.Curie)
     .Build();
 
 var result = await api.Classifications.CreateClassificationAsync(request);
