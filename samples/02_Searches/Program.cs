@@ -16,16 +16,16 @@ namespace _02_Searches
 
             // Set up a search request
             // https://beta.openai.com/docs/api-reference/searches
-            var request = new SearchRequest
-            {
-                Query = "the president",
-                Documents = new List<string>
+            var request = new SearchRequestBuilder()
+                .WithQuery("the president")
+                .WithDocuments(new List<string>
                 {
                     "White House",
                     "hospital",
                     "school"
-                }
-            };
+                })
+                .Build();
+
 
             // Send the request & get the best match
             // To get the score of the result, use GetBestMatchWithScoreAsync(request)
@@ -33,6 +33,8 @@ namespace _02_Searches
 
             // Print the result
             Console.WriteLine(result);
+
+            // Should print "White House"
         }
     }
 }

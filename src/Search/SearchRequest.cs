@@ -25,6 +25,12 @@ namespace OpenAI
 			Documents = documents?.ToList() ?? new List<string>();
 		}
 
+        public SearchRequest(List<string> documents, string query = null)
+        {
+            Query = query;
+            Documents = documents;
+        }
+
 		public SearchRequest(IEnumerable<string> documents)
 		{
 			Documents = documents.ToList();

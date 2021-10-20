@@ -50,16 +50,15 @@ Given a query and a set of documents or labels, the model ranks each document ba
 ```csharp
 var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
 
-var request = new SearchRequest
-{
-	Query = "the president",
-	Documents = new List<string>
-	{
-	    "White House",
-	    "hospital",
-	    "school"
-	}
-};
+var request = new SearchRequestBuilder()
+    .WithQuery("the president")
+    .WithDocuments(new List<string>
+    {
+        "White House",
+        "hospital",
+        "school"
+    })
+    .Build();
 
 var result = await api.Search.GetBestMatchAsync(request);
 Console.WriteLine(result);
