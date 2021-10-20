@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7B8C59A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{8658CEB9-ED27-4D60-BF79-BAE2DA6BB995}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01_Completions", "samples\01_basic\01_Completions.csproj", "{DFBC1C07-036E-4DD8-8592-02E59D652E64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01_Completions", "samples\01_Completions\01_Completions.csproj", "{DFBC1C07-036E-4DD8-8592-02E59D652E64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_Searches", "samples\02_Searches\02_Searches.csproj", "{117B9420-B2C9-4A51-8654-611CB837D452}"
 EndProject
