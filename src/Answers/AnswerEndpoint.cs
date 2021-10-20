@@ -31,12 +31,12 @@ namespace OpenAI
             //request.Stream = false;
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Api.Auth.ApiKey);
-            client.DefaultRequestHeaders.Add("User-Agent", "okgodoit/dotnet_openai_api");
+            client.DefaultRequestHeaders.Add("User-Agent", "williamwelsh/openai-dotnet");
 
             var jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
-            var stringContent = new StringContent(jsonContent, UnicodeEncoding.UTF8, "application/json");
+            var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync($"https://api.openai.com/v1/answers", stringContent);
+            var response = await client.PostAsync("https://api.openai.com/v1/answers", stringContent);
             if (response.IsSuccessStatusCode)
             {
                 var resultAsString = await response.Content.ReadAsStringAsync();
@@ -54,7 +54,7 @@ namespace OpenAI
                 return res;
             }
 
-            throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode.ToString() + ". Request body: " + jsonContent);
+            throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode + ". Request body: " + jsonContent);
         }
 
         public Task<AnswerResult> CreateAnswerAsync(string question, string[][] examples, string examplesContext)

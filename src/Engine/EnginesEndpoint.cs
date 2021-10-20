@@ -11,7 +11,7 @@ namespace OpenAI
 	/// </summary>
 	public class EnginesEndpoint
 	{
-		OpenAIAPI Api;
+		private OpenAIAPI Api;
 
 		/// <summary>
 		/// Constructor of the api endpoint.  Rather than instantiating this yourself, access it through an instance of <see cref="OpenAIAPI"/> as <see cref="OpenAIAPI.Engines"/>.
@@ -50,9 +50,9 @@ namespace OpenAI
 		{
 			var client = new HttpClient();
 			client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth.ThisOrDefault().ApiKey);
-			client.DefaultRequestHeaders.Add("User-Agent", "okgodoit/dotnet_openai_api");
+			client.DefaultRequestHeaders.Add("User-Agent", "williamwelsh/openai-dotnet");
 
-			var response = await client.GetAsync(@"https://api.openai.com/v1/engines");
+			var response = await client.GetAsync("https://api.openai.com/v1/engines");
             var resultAsString = await response.Content.ReadAsStringAsync();
 
 			if (response.IsSuccessStatusCode)
@@ -61,7 +61,7 @@ namespace OpenAI
 				return engines;
 			}
 
-            throw new HttpRequestException("Error calling OpenAi API to get list of engines.  HTTP status code: " + response.StatusCode.ToString() + ". Content: " + resultAsString);
+            throw new HttpRequestException("Error calling OpenAi API to get list of engines.  HTTP status code: " + response.StatusCode + ". Content: " + resultAsString);
         }
 
 		/// <summary>
@@ -74,12 +74,12 @@ namespace OpenAI
 		{
 			if (auth.ThisOrDefault()?.ApiKey is null)
 			{
-				throw new AuthenticationException("You must provide API authentication.  Please refer to https://github.com/OkGoDoIt/OpenAI-API-dotnet#authentication for details.");
+				throw new AuthenticationException("You must provide API authentication.  Please refer to https://github.com/WilliamWelsh/OpenAI.Net#authentication for details.");
 			}
 
 			var client = new HttpClient();
 			client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth.ThisOrDefault().ApiKey);
-			client.DefaultRequestHeaders.Add("User-Agent", "okgodoit/dotnet_openai_api");
+			client.DefaultRequestHeaders.Add("User-Agent", "williamwelsh/openai-dotnet");
 
 			var response = await client.GetAsync(@"https://api.openai.com/v1/engines/" + id);
 			if (response.IsSuccessStatusCode)
