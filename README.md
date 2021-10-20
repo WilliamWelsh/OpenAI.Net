@@ -72,15 +72,15 @@ Given a query and a set of labeled examples, the model will predict the most lik
 var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
 
 var request = new ClassificationRequestBuilder()
-    .WithExamples(new []
+    .WithExamples(new List<List<string>>
     {
-        new [] { "A happy moment", "Positive" },
-        new [] { "I am sad.", "Negative" },
-        new [] { "I am feeling awesome", "Positive" }
+        new List<string> { "A happy moment", "Positive" },
+        new List<string> { "I am sad.", "Negative" },
+        new List<string> { "I am feeling awesome", "Positive" }
     })
-    .WithLabels(new []
+    .WithLabels(new List<string>
     {
-    	"Positive", "Negative", "Neutral"
+        "Positive", "Negative", "Neutral"
     })
     .WithQuery("It is a raining day :(")
     .WithSearchModel(Engine.Ada)

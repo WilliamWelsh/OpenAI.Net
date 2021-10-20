@@ -1,4 +1,6 @@
-﻿namespace OpenAI
+﻿using System.Collections.Generic;
+
+namespace OpenAI
 {
     public class ClassificationRequestBuilder
     {
@@ -6,9 +8,9 @@
 
         public string Query { get; set; }
 
-        public string[][]? Examples { get; set; }
+        public List<List<string>>? Examples { get; set; }
 
-        public string[]? Labels { get; set; }
+        public List<string>? Labels { get; set; }
 
         public Engine? SearchModel { get; set; }
 
@@ -34,7 +36,7 @@
         /// A list of examples with labels
         /// All the label strings will be normalized to be capitalized.
         /// </summary>
-        public ClassificationRequestBuilder WithExamples(string[][] examples)
+        public ClassificationRequestBuilder WithExamples(List<List<string>> examples)
         {
             Examples = examples;
             return this;
@@ -46,7 +48,7 @@
         /// automatically collected from the examples you provide.
         /// All the label strings will be normalized to be capitalized.
         /// </summary>
-        public ClassificationRequestBuilder WithLabels(string[] labels)
+        public ClassificationRequestBuilder WithLabels(List<string> labels)
         {
             Labels = labels;
             return this;

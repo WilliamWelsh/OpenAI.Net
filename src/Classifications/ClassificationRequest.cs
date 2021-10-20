@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace OpenAI
 {
@@ -12,7 +13,7 @@ namespace OpenAI
         /// All the label strings will be normalized to be capitalized.
         /// </summary>
         [JsonProperty("examples")]
-        public string[][]? Examples { get; set; }
+        public List<List<string>>? Examples { get; set; }
 
         /// <summary>
         /// The set of categories being classified.
@@ -21,7 +22,7 @@ namespace OpenAI
         /// All the label strings will be normalized to be capitalized.
         /// </summary>
         [JsonProperty("labels")]
-        public string[]? Labels { get; set; }
+        public List<string>? Labels { get; set; }
 
         /// <summary>
         /// Query to be classified.
@@ -52,7 +53,7 @@ namespace OpenAI
         /// <summary>
         /// Creates a new <see cref="ClassificationRequest"/> with the specified parameters
         /// </summary>
-        public ClassificationRequest(string query, string model, string[][] examples = null, string[] labels = null, string searchModel = null)
+        public ClassificationRequest(string query, string model, List<List<string>> examples = null, List<string> labels = null, string searchModel = null)
         {
             this.Query = query;
             this.Model = model;

@@ -1,6 +1,7 @@
 ﻿using OpenAI;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace _03_Classifications
 {
@@ -16,13 +17,13 @@ namespace _03_Classifications
             // Set up a Classifications request
             // https://beta.openai.com/docs/api-reference/classifications
             var request = new ClassificationRequestBuilder()
-                .WithExamples(new []
+                .WithExamples(new List<List<string>>
                 {
-                    new [] { "A happy moment", "Positive" },
-                    new [] { "I am sad.", "Negative" },
-                    new [] { "I am feeling awesome", "Positive" }
+                    new List<string> { "A happy moment", "Positive" },
+                    new List<string> { "I am sad.", "Negative" },
+                    new List<string> { "I am feeling awesome", "Positive" }
                 })
-                .WithLabels(new []
+                .WithLabels(new List<string>
                 {
                     "Positive", "Negative", "Neutral"
                 })
