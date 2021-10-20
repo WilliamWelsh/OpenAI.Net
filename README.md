@@ -71,22 +71,21 @@ Given a query and a set of labeled examples, the model will predict the most lik
 ```csharp
 var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
 
-var request = new ClassificationRequest
-{
-    Examples = new []
+var request = new ClassificationRequestBuilder()
+    .WithExamples(new []
     {
         new [] { "A happy moment", "Positive" },
         new [] { "I am sad.", "Negative" },
         new [] { "I am feeling awesome", "Positive" }
-    },
-    Labels = new []
+    })
+    .WithLabels(new []
     {
     	"Positive", "Negative", "Neutral"
-    },
-    Query = "It is a raining day :(",
-    SearchModel = "ada",
-    Model = "curie"
-};
+    })
+    .WithQuery("It is a raining day :(")
+    .WithSearchModel("ada")
+    .WithModel("curie")
+    .Build();
 
 var result = await api.Classifications.CreateClassificationAsync(request);
 Console.WriteLine(result.Label);

@@ -12,7 +12,7 @@ namespace OpenAI
         /// All the label strings will be normalized to be capitalized.
         /// </summary>
         [JsonProperty("examples")]
-        public string[][] Examples { get; set; }
+        public string[][]? Examples { get; set; }
 
         /// <summary>
         /// The set of categories being classified.
@@ -21,7 +21,7 @@ namespace OpenAI
         /// All the label strings will be normalized to be capitalized.
         /// </summary>
         [JsonProperty("labels")]
-        public string[] Labels { get; set; }
+        public string[]? Labels { get; set; }
 
         /// <summary>
         /// Query to be classified.
@@ -30,10 +30,10 @@ namespace OpenAI
         public string Query { get; set; }
 
         /// <summary>
-        /// ID of the engine to use for Search.
+        /// ID of the engine to use for Search. Defaults to ada.
         /// </summary>
         [JsonProperty("search_model")]
-        public string SearchModel { get; set; }
+        public string? SearchModel { get; set; }
 
         /// <summary>
         /// ID of the engine to use for completion.
@@ -47,6 +47,18 @@ namespace OpenAI
         public ClassificationRequest()
         {
             
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="ClassificationRequest"/> with the specified parameters
+        /// </summary>
+        public ClassificationRequest(string query, string model, string[][] examples = null, string[] labels = null, string searchModel = null)
+        {
+            this.Query = query;
+            this.Model = model;
+            this.Examples = examples;
+            this.Labels = labels;
+            this.SearchModel = searchModel;
         }
 
         public ClassificationRequest(ClassificationRequest basedOn)

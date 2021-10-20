@@ -15,26 +15,27 @@ namespace _03_Classifications
 
             // Set up a Classifications request
             // https://beta.openai.com/docs/api-reference/classifications
-            var request = new ClassificationRequest
-            {
-                Examples = new []
+            var request = new ClassificationRequestBuilder()
+                .WithExamples(new []
                 {
                     new [] { "A happy moment", "Positive" },
                     new [] { "I am sad.", "Negative" },
                     new [] { "I am feeling awesome", "Positive" }
-                },
-                Labels = new []
+                })
+                .WithLabels(new []
                 {
                     "Positive", "Negative", "Neutral"
-                },
-                Query = "It is a raining day :(",
-                SearchModel = "ada",
-                Model = "curie"
-            };
+                })
+                .WithQuery("It is a raining day :(")
+                .WithSearchModel("ada")
+                .WithModel("curie")
+                .Build();
 
             var result = await api.Classifications.CreateClassificationAsync(request);
 
             Console.WriteLine(result.Label);
+
+            // Should print "Negative"
         }
     }
 }
