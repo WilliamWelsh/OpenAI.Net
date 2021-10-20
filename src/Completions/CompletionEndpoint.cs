@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +16,7 @@ namespace OpenAI
 	public class CompletionEndpoint
 	{
 		OpenAIAPI Api;
+
 		/// <summary>
 		/// This allows you to set default parameters for every request, for example to set a default temperature or max tokens.  For every request, if you do not have a parameter set on the request but do have it set here as a default, the request will automatically pick up the default value.
 		/// </summary>
@@ -46,17 +46,17 @@ namespace OpenAI
 			}
 
 			request.Stream = false;
-			HttpClient client = new HttpClient();
+            var client = new HttpClient();
 			client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Api.Auth.ApiKey);
 			client.DefaultRequestHeaders.Add("User-Agent", "okgodoit/dotnet_openai_api");
 
-			string jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            var jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
 			var stringContent = new StringContent(jsonContent, UnicodeEncoding.UTF8, "application/json");
 
 			var response = await client.PostAsync($"https://api.openai.com/v1/engines/{Api.UsingEngine.EngineName}/completions", stringContent);
 			if (response.IsSuccessStatusCode)
 			{
-				string resultAsString = await response.Content.ReadAsStringAsync();
+                var resultAsString = await response.Content.ReadAsStringAsync();
 
 				var res = JsonConvert.DeserializeObject<CompletionResult>(resultAsString);
 				try
@@ -70,11 +70,9 @@ namespace OpenAI
 
 				return res;
 			}
-			else
-			{
-				throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode.ToString() + ". Request body: " + jsonContent);
-			}
-		}
+
+            throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode.ToString() + ". Request body: " + jsonContent);
+        }
 
 
 		/// <summary>
@@ -115,7 +113,7 @@ namespace OpenAI
 			params string[] stopSequences
 			)
 		{
-			CompletionRequest request = new CompletionRequest(DefaultCompletionRequestArgs)
+			var request = new CompletionRequest(DefaultCompletionRequestArgs)
 			{
 				Prompt = prompt,
 				MaxTokens = max_tokens ?? DefaultCompletionRequestArgs.MaxTokens,
@@ -138,7 +136,7 @@ namespace OpenAI
 		/// <returns></returns>
 		public Task<CompletionResult> CreateCompletionAsync(params string[] prompts)
 		{
-			CompletionRequest request = new CompletionRequest(DefaultCompletionRequestArgs)
+            var request = new CompletionRequest(DefaultCompletionRequestArgs)
 			{
 				MultiplePrompts = prompts
 			};
@@ -163,9 +161,9 @@ namespace OpenAI
 			}
 
 			request = new CompletionRequest(request) { Stream = true };
-			HttpClient client = new HttpClient();
+            var client = new HttpClient();
 
-			string jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            var jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
 			var stringContent = new StringContent(jsonContent, UnicodeEncoding.UTF8, "application/json");
 
 			using (HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, $"https://api.openai.com/v1/engines/{Api.UsingEngine.EngineName}/completions"))
@@ -241,9 +239,9 @@ namespace OpenAI
 			}
 
 			request = new CompletionRequest(request) { Stream = true };
-			HttpClient client = new HttpClient();
+            var client = new HttpClient();
 
-			string jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            var jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
 			var stringContent = new StringContent(jsonContent, UnicodeEncoding.UTF8, "application/json");
 
 			using (HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, $"https://api.openai.com/v1/engines/{Api.UsingEngine.EngineName}/completions"))
@@ -310,7 +308,7 @@ namespace OpenAI
 			bool? echo = null,
 			params string[] stopSequences)
 		{
-			CompletionRequest request = new CompletionRequest(DefaultCompletionRequestArgs)
+            var request = new CompletionRequest(DefaultCompletionRequestArgs)
 			{
 				Prompt = prompt,
 				MaxTokens = max_tokens ?? DefaultCompletionRequestArgs.MaxTokens,
@@ -337,9 +335,9 @@ namespace OpenAI
 		/// <returns>A string of the prompt followed by the best completion</returns>
 		public async Task<string> CreateAndFormatCompletion(CompletionRequest request)
 		{
-			string prompt = request.Prompt;
+            var prompt = request.Prompt;
 			var result = await CreateCompletionAsync(request);
-			return prompt + result.ToString();
+			return prompt + result;
 		}
 
 		#endregion

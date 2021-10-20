@@ -53,10 +53,8 @@ namespace OpenAI
 
                 return res;
             }
-            else
-            {
-                throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode.ToString() + ". Request body: " + jsonContent);
-            }
+
+            throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode.ToString() + ". Request body: " + jsonContent);
         }
 
         public Task<AnswerResult> CreateAnswerAsync(string question, string[][] examples, string examplesContext)

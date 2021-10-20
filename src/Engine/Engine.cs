@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenAI
@@ -22,21 +18,15 @@ namespace OpenAI
 		/// Allows an engine to be implicitly cast to the string of its <see cref="EngineName"/>
 		/// </summary>
 		/// <param name="engine">The <see cref="Engine"/> to cast to a string.</param>
-		public static implicit operator string(Engine engine)
-		{
-			return engine.EngineName;
-		}
+		public static implicit operator string(Engine engine) => engine.EngineName;
 
-		/// <summary>
+        /// <summary>
 		/// Allows a string to be implicitly cast as an <see cref="Engine"/> with that <see cref="EngineName"/>
 		/// </summary>
 		/// <param name="name">The id/<see cref="EngineName"/> to use</param>
-		public static implicit operator Engine(string name)
-		{
-			return new Engine(name);
-		}
+		public static implicit operator Engine(string name) => new Engine(name);
 
-		/// <summary>
+        /// <summary>
 		/// Represents an Engine with the given id/<see cref="EngineName"/>
 		/// </summary>
 		/// <param name="name">The id/<see cref="EngineName"/> to use.
@@ -113,8 +103,5 @@ namespace OpenAI
 		{
 			return await EnginesEndpoint.RetrieveEngineDetailsAsync(this.EngineName, auth);
 		}
-
-
-		
 	}
 }

@@ -1,13 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenAI
+﻿namespace OpenAI
 {
 	/// <summary>
 	/// Entry point to the OpenAPI API, handling auth and allowing access to the various API endpoints

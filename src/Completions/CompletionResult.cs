@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 
 namespace OpenAI
 {
@@ -101,16 +98,14 @@ namespace OpenAI
 		/// Gets the text of the first completion, representing the main result
 		/// </summary>
 		public override string ToString()
-		{
-			if (Completions != null && Completions.Count > 0)
+        {
+            if (Completions != null && Completions.Count > 0)
 				return Completions[0].ToString();
-			else
-				return $"CompletionResult {Id} has no valid output";
-		}
+            return $"CompletionResult {Id} has no valid output";
+        }
 	}
 
-
-	public class Logprobs
+    public class Logprobs
 	{
 		[JsonProperty("tokens")]
 		public List<string> Tokens { get; set; }

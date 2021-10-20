@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
 
 namespace OpenAI
 {
@@ -108,14 +104,13 @@ namespace OpenAI
 		public object CompiledStop
 		{
 			get
-			{
-				if (MultipleStopSequences?.Length == 1)
+            {
+                if (MultipleStopSequences?.Length == 1)
 					return StopSequence;
-				else if (MultipleStopSequences?.Length > 0)
-					return MultipleStopSequences;
-				else
-					return null;
-			}
+                if (MultipleStopSequences?.Length > 0)
+                    return MultipleStopSequences;
+                return null;
+            }
 		}
 
 		/// <summary>
@@ -123,7 +118,6 @@ namespace OpenAI
 		/// </summary>
 		[JsonIgnore]
 		public string[] MultipleStopSequences { get; set; }
-
 
 		/// <summary>
 		/// The stop sequence where the API will stop generating further tokens. The returned text will not contain the stop sequence.  For convenience, if you are only requesting a single stop sequence, set it here
@@ -209,8 +203,6 @@ namespace OpenAI
 			this.Echo = echo;
 			this.MultipleStopSequences = stopSequences;
 		}
-
-
-	}
+    }
 
 }
