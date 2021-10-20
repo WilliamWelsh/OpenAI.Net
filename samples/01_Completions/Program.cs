@@ -13,9 +13,15 @@ namespace _01_Completions
             // Initialize the API
             var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
 
-            // Create a completion
+            // Create a completion request
             // https://beta.openai.com/docs/api-reference/completions
-            var result = await api.Completions.CreateCompletionAsync(prompt: "Once upon a time", max_tokens: 5);
+            var request = new CompletionRequest
+            {
+                Prompt = "Once upon a time",
+                MaxTokens = 5
+            };
+
+            var result = await api.Completions.CreateCompletionAsync(request);
 
             // Print the result
             Console.WriteLine(result.ToString());

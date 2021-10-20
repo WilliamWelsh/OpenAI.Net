@@ -34,7 +34,13 @@ Given a prompt, the model will return one or more predicted completions, and can
 ```csharp
 var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
 
-var result = await api.Completions.CreateCompletionAsync(prompt: "Once upon a time", max_tokens: 5);
+var request = new CompletionRequest
+{
+    Prompt = "Once upon a time",
+    MaxTokens = 5
+};
+
+var result = await api.Completions.CreateCompletionAsync(request);
 Console.WriteLine(result.ToString());
 // Should print something like " there was a girl who"
 ```
