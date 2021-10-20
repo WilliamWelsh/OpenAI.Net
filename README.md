@@ -1,7 +1,22 @@
 <h1 align="center">
-<img src="https://raw.githubusercontent.com/WilliamWelsh/OpenAI.Net/main/logo.png" alt="OpenAI.Net" />
+	<img src="https://raw.githubusercontent.com/WilliamWelsh/OpenAI.Net/main/logo.png" alt="OpenAI.Net" />
+	<br/>
+	OpenAI.Net
 </h1>
+
 <h4 align="center">An unofficial .NET API wrapper for OpenAI.</h4>
+
+<div align="center">
+
+[![Discord Bots](https://img.shields.io/nuget/v/OpenAI.NET)](https://www.nuget.org/packages/OpenAI.Net)
+
+</div>  
+
+## Installation
+Stable builds are available through [NuGet](https://www.nuget.org/packages/OpenAI.Net).  
+```
+Install-Package OpenAI.Net
+```
 
 ## Authentication
 There are 3 ways to provide your API keys, in order of precedence:
