@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04_Answers", "samples\04_An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieToEmoji", "samples\MovieToEmoji\MovieToEmoji.csproj", "{F0958263-79E9-423A-8148-A5786C22DBA1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactualAnswering", "samples\FactualAnswering\FactualAnswering.csproj", "{EC395866-42A4-47DD-B19F-DCBB1717BAEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{F0958263-79E9-423A-8148-A5786C22DBA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0958263-79E9-423A-8148-A5786C22DBA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0958263-79E9-423A-8148-A5786C22DBA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC395866-42A4-47DD-B19F-DCBB1717BAEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC395866-42A4-47DD-B19F-DCBB1717BAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC395866-42A4-47DD-B19F-DCBB1717BAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC395866-42A4-47DD-B19F-DCBB1717BAEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{907CF59D-6156-47E0-A057-D3BD661C6364} = {8658CEB9-ED27-4D60-BF79-BAE2DA6BB995}
 		{B3E3009A-6674-4E4F-BD9D-672184E2C77E} = {8658CEB9-ED27-4D60-BF79-BAE2DA6BB995}
 		{F0958263-79E9-423A-8148-A5786C22DBA1} = {8658CEB9-ED27-4D60-BF79-BAE2DA6BB995}
+		{EC395866-42A4-47DD-B19F-DCBB1717BAEE} = {8658CEB9-ED27-4D60-BF79-BAE2DA6BB995}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {971477B1-6BBA-40CD-8B76-AEBC01D99130}
