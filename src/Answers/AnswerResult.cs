@@ -34,15 +34,24 @@ namespace OpenAI
         [JsonProperty("completion")]
         public string Completion { get; set; }
 
+        /// <summary>
+        /// ID of the engine used for completion.
+        /// </summary>
         [JsonProperty("model")]
         public string Model { get; set; }
 
         [JsonProperty("object")]
         public string Object { get; set; }
 
+        /// <summary>
+        /// ID of the engine used for Search.
+        /// </summary>
         [JsonProperty("search_model")]
         public string SearchModel { get; set; }
 
+        /// <summary>
+        /// Answers returned
+        /// </summary>
         [JsonProperty("selected_documents")]
         public SelectedDocument[] SelectedDocuments { get; set; }
         
