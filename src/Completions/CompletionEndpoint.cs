@@ -186,25 +186,27 @@ namespace OpenAI
 						{
 							if (line.StartsWith("data: "))
 								line = line.Substring("data: ".Length);
+
 							if (line == "[DONE]")
 							{
 								return;
 							}
-							else if (!string.IsNullOrWhiteSpace(line))
-							{
-								index++;
-								var res = JsonConvert.DeserializeObject<CompletionResult>(line.Trim());
-								try
-								{
-									res.Organization = response.Headers.GetValues("Openai-Organization").FirstOrDefault();
-									res.RequestId = response.Headers.GetValues("X-Request-ID").FirstOrDefault();
-									res.ProcessingTime = TimeSpan.FromMilliseconds(int.Parse(response.Headers.GetValues("Openai-Processing-Ms").First()));
-								}
-								catch (Exception) { }
 
-								resultHandler(index, res);
-							}
-						}
+                            if (!string.IsNullOrWhiteSpace(line))
+                            {
+                                index++;
+                                var res = JsonConvert.DeserializeObject<CompletionResult>(line.Trim());
+                                try
+                                {
+                                    res.Organization = response.Headers.GetValues("Openai-Organization").FirstOrDefault();
+                                    res.RequestId = response.Headers.GetValues("X-Request-ID").FirstOrDefault();
+                                    res.ProcessingTime = TimeSpan.FromMilliseconds(int.Parse(response.Headers.GetValues("Openai-Processing-Ms").First()));
+                                }
+                                catch (Exception) { }
+
+                                resultHandler(index, res);
+                            }
+                        }
 					}
 				}
 				else
@@ -262,16 +264,18 @@ namespace OpenAI
 						{
 							if (line.StartsWith("data: "))
 								line = line.Substring("data: ".Length);
+
 							if (line == "[DONE]")
 							{
 								yield break;
 							}
-							else if (!string.IsNullOrWhiteSpace(line))
-							{
-								var res = JsonConvert.DeserializeObject<CompletionResult>(line.Trim());
-								yield return res;
-							}
-						}
+
+                            if (!string.IsNullOrWhiteSpace(line))
+                            {
+                                var res = JsonConvert.DeserializeObject<CompletionResult>(line.Trim());
+                                yield return res;
+                            }
+                        }
 					}
 				}
 				else

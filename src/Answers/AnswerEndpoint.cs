@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Authentication;
 using System.Text;
@@ -29,7 +27,6 @@ namespace OpenAI
                 throw new AuthenticationException("You must provide API authentication.  Please refer to https://github.com/WilliamWelsh/OpenAI.Net#authentication for details.");
             }
 
-            //request.Stream = false;
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Api.Auth.ApiKey);
             client.DefaultRequestHeaders.Add("User-Agent", "williamwelsh/openai-dotnet");
@@ -42,17 +39,7 @@ namespace OpenAI
             {
                 var resultAsString = await response.Content.ReadAsStringAsync();
 
-                var res = JsonConvert.DeserializeObject<AnswerResult>(resultAsString);
-                try
-                {
-                    //res.Organization = response.Headers.GetValues("Openai-Organization").FirstOrDefault();
-                    //res.RequestId = response.Headers.GetValues("X-Request-ID").FirstOrDefault();
-                    //res.ProcessingTime = TimeSpan.FromMilliseconds(int.Parse(response.Headers.GetValues("Openai-Processing-Ms").First()));
-                }
-                catch (Exception) { }
-
-
-                return res;
+                return JsonConvert.DeserializeObject<AnswerResult>(resultAsString); ;
             }
 
             throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode + ". Request body: " + jsonContent);

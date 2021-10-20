@@ -31,10 +31,6 @@ namespace OpenAI
         /// <summary>
         /// Build into a SearchRequest
         /// </summary>
-        /// <returns></returns>
-        public SearchRequest Build()
-        {
-            return new SearchRequest(query: Query, documents: Documents);
-        }
+        public SearchRequest Build() => new SearchRequest(query: Query, documents: Documents);
     }
 }

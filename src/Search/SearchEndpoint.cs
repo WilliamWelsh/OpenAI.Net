@@ -14,7 +14,7 @@ namespace OpenAI
 	/// </summary>
 	public class SearchEndpoint
 	{
-		OpenAIAPI Api;
+		private OpenAIAPI Api;
 
 		/// <summary>
 		/// Constructor of the api endpoint.  Rather than instantiating this yourself, access it through an instance of <see cref="OpenAIAPI"/> as <see cref="OpenAIAPI.Search"/>.
@@ -38,17 +38,17 @@ namespace OpenAI
 				throw new AuthenticationException("You must provide API authentication.  Please refer to https://github.com/WilliamWelsh/OpenAI.Net#authentication for details.");
 			}
 
-			HttpClient client = new HttpClient();
+            var client = new HttpClient();
 			client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Api.Auth.ApiKey);
 			client.DefaultRequestHeaders.Add("User-Agent", "williamwelsh/openai-dotnet");
 
-			string jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, MissingMemberHandling = MissingMemberHandling.Ignore });
+			var jsonContent = JsonConvert.SerializeObject(request, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, MissingMemberHandling = MissingMemberHandling.Ignore });
 			var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
 			var response = await client.PostAsync($"https://api.openai.com/v1/engines/{Api.UsingEngine.EngineName}/search", stringContent);
 			if (response.IsSuccessStatusCode)
 			{
-				string resultAsString = await response.Content.ReadAsStringAsync();
+                var resultAsString = await response.Content.ReadAsStringAsync();
 				var res = JsonConvert.DeserializeObject<SearchResponse>(resultAsString);
 
 				try
@@ -64,11 +64,9 @@ namespace OpenAI
 
 				return res.Results.ToDictionary(r => request.Documents[r.DocumentIndex], r => r.Score);
 			}
-			else
-			{
-				throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode + ". Request body: " + jsonContent);
-			}
-		}
+
+            throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode + ". Request body: " + jsonContent);
+        }
 
 		/// <summary>
 		/// Perform a semantic search over a list of documents, with a specific query
@@ -106,11 +104,8 @@ namespace OpenAI
 		public async Task<string> GetBestMatchAsync(SearchRequest request)
 		{
 			var results = await GetSearchResultsAsync(request);
-			if (results.Count == 0)
-				return null;
-
-			return results.ToList().OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
-		}
+			return results.Count == 0 ? null : results.ToList().OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
+        }
 
 		/// <summary>
 		/// Perform a semantic search over a list of documents with a specific query to get the single best match

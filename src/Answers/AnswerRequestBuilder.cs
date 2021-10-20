@@ -112,9 +112,6 @@ namespace OpenAI
         /// Build into a AnswerRequest
         /// </summary>
         /// <returns></returns>
-        public AnswerRequest Build()
-        {
-            return new AnswerRequest(model: Model, question: Question, examples: Examples, examplesContext: ExamplesContext, documents: Documents, searchModel: SearchModel, temperature: Temperature, maxTokens: MaxTokens, stop: Stop);
-        }
+        public AnswerRequest Build() => new AnswerRequest(model: Model, question: Question, examples: Examples, examplesContext: ExamplesContext, documents: Documents, searchModel: SearchModel, temperature: Temperature, maxTokens: MaxTokens, stop: Stop);
     }
 }

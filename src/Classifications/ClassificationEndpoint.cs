@@ -41,17 +41,7 @@ namespace OpenAI
             {
                 var resultAsString = await response.Content.ReadAsStringAsync();
 
-                var res = JsonConvert.DeserializeObject<ClassificationResult>(resultAsString);
-                try
-                {
-                    //res.Organization = response.Headers.GetValues("Openai-Organization").FirstOrDefault();
-                    //res.RequestId = response.Headers.GetValues("X-Request-ID").FirstOrDefault();
-                    //res.ProcessingTime = TimeSpan.FromMilliseconds(int.Parse(response.Headers.GetValues("Openai-Processing-Ms").First()));
-                }
-                catch (Exception) { }
-
-
-                return res;
+                return JsonConvert.DeserializeObject<ClassificationResult>(resultAsString);
             }
 
             throw new HttpRequestException("Error calling OpenAi API to get completion.  HTTP status code: " + response.StatusCode + ". Request body: " + jsonContent);

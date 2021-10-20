@@ -54,7 +54,5 @@ namespace OpenAI
         /// </summary>
         [JsonProperty("selected_documents")]
         public SelectedDocument[] SelectedDocuments { get; set; }
-        
-        // TODO : Add ToString() override
     }
 }
