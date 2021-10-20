@@ -10,6 +10,20 @@ namespace MovieToEmoji
         // This is OpenAI's example of "Movie to Emoji" in OpenAI.NET
         // https://beta.openai.com/examples/default-movie-to-emoji
 
+        // Prompt:
+        // Back to Future: 👨👴🚗🕒
+        // Batman: 🤵🦇
+        // Transformers: 🚗🤖
+        // Wonder Woman: 👸🏻👸🏼👸🏽👸🏾👸🏿
+        // Winnie the Pooh: 🐻🐼🐻
+        // The Godfather: 👨👩👧🕵🏻‍♂️👲💥
+        // Game of Thrones: 🏹🗡🗡🏹
+        // Spider-Man: 
+
+        // Sample response:
+        // 🕷
+        // The Incredible Hulk: 💪
+
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()

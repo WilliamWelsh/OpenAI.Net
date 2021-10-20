@@ -10,6 +10,46 @@ namespace FactualAnswering
         // This is OpenAI's example of "Factual answering" in OpenAI.NET
         // https://beta.openai.com/examples/default-factual-answering
 
+        // Prompt:
+        // Q: Who is Batman?
+        // A: Batman is a fictional comic book character.
+        // ###
+        // Q: What is torsalplexity?
+        // A: ?
+        // ###
+        // Q: What is Devz9?
+        // A: ?
+        // ###
+        // Q: Who is George Lucas?
+        // A: George Lucas is American film director and producer famous for creating Star Wars.
+        // ###
+        // Q: What is the capital of California?
+        // A: Sacramento.
+        // ###
+        // Q: What orbits the Earth?
+        // A: The Moon.
+        // ###
+        // Q: Who is Fred Rickerson?
+        // A: ?
+        // ###
+        // Q: What is an atom?
+        // A: An atom is a tiny particle that makes up everything.
+        // ###
+        // Q: Who is Alvan Muntz?
+        // A: ?
+        // ###
+        // Q: What is Kozar-09?
+        // A: ?
+        // ###
+        // Q: How many moons does Mars have?
+        // A: Two, Phobos and Deimos.
+        // ###
+        // Q: What's a language model?
+        // A:
+
+        // Sample response:
+        // A language model is a statistical model that describes the probability of a word given a context.
+
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()
