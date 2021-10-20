@@ -1,7 +1,6 @@
 <h1 align="center">
-OpenAI.Net
+<img src="https://raw.githubusercontent.com/WilliamWelsh/OpenAI.Net/main/logo.png" alt="OpenAI.Net" />
 </h1>
-
 <h4 align="center">An unofficial .NET API wrapper for OpenAI.</h4>
 
 ## Authentication
