@@ -27,7 +27,7 @@ var api = new OpenAIAPI(); // uses default, env, or config file
 
 ## Examples
 
-You can view built examples in the [samples](https://github.com/WilliamWelsh/OpenAI.Net/tree/main/samples) folder.  
+You can view built examples in the [samples](https://github.com/WilliamWelsh/OpenAI.Net/tree/main/samples) folder.  These examples include very basic access of endpoints, as well as versions of [OpenAI's example applications](https://beta.openai.com/examples) using this wrapper.  
 
 ### Completions
 Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position. [View on OpenAI](https://beta.openai.com/docs/api-reference/completions).  
@@ -128,13 +128,13 @@ Console.WriteLine(result.Answers[0]);
 Coming soon. Feel free to make a pull request.
 
 ## Streaming
-Streaming allows you to get results are they are generated, which can help your application feel more responsive, especially on slow models like Davinci.
+Streaming allows you to get results as they are generated, which can help your application feel more responsive, especially on slow models like Davinci.
 
-Using the new C# 8.0 async iterators:
+Using async iterators:
 ```csharp
 IAsyncEnumerable<CompletionResult> StreamCompletionEnumerableAsync(CompletionRequest request)
 
-// for example
+// Example
 await foreach (var token in api.Completions.StreamCompletionEnumerableAsync(new CompletionRequest("My name is Roger and I am a principal software engineer at Salesforce.  This is my resume:", 200, 0.5, presencePenalty: 0.1, frequencyPenalty: 0.1)))
 {
 	Console.Write(token);
@@ -145,7 +145,7 @@ Or if using .NET framework or C# <8.0:
 ```csharp
 StreamCompletionAsync(CompletionRequest request, Action<CompletionResult> resultHandler)
 
-// for example
+// Example
 await api.Completions.StreamCompletionAsync(
 	new CompletionRequest("My name is Roger and I am a principal software engineer at Salesforce.  This is my resume:", 200, 0.5, presencePenalty: 0.1, frequencyPenalty: 0.1),
 	res => ResumeTextbox.Text += res.ToString());
@@ -158,7 +158,7 @@ You can get all results as a dictionary using
 ```csharp
 GetSearchResultsAsync(SearchRequest request)
 
-// for example
+// Example
 var request = new SearchRequest()
 {
 	Query = "Washington DC",
@@ -173,7 +173,7 @@ The returned dictionary maps documents to scores.  You can create your `SearchRe
 ```csharp
 GetSearchResultsAsync(string query, params string[] documents)
 
-// for example
+// Example
 var result = await api.Search.GetSearchResultsAsync("Washington DC", "Canada", "China", "USA", "Spain");
 ```
 
