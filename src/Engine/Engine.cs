@@ -81,7 +81,7 @@ namespace OpenAI
 		public static Engine Babbage => new Engine("babbage") { Owner = "openai", Ready = true };
 
 		/// <summary>
-		/// The 2nd most powerful engine, a bit faster than <see cref=Davinci"/>, and a bit faster.
+		/// The 2nd most powerful engine, a bit faster than <see cref="Davinci"/>, and a bit faster.
 		/// </summary>
 		public static Engine Curie => new Engine("curie") { Owner = "openai", Ready = true };
 
