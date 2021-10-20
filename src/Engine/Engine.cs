@@ -100,6 +100,11 @@ namespace OpenAI
 		/// </summary>
 		public static Engine DavinciInstructBeta => new Engine("davinci-instruct-beta") { Owner = "openai", Ready = true };
 
+        /// <summary>
+        /// UNTESTED. Would love if someone with access to codex could test this for me. The codex version of <see cref="Davinci"/> engine.
+        /// </summary>
+        public static Engine DavinciCodex => new Engine("davinci-codex") { Owner = "openai", Ready = true };
+
 		/// <summary>
 		/// The default Engine to use in the case no other is specified.  Defaults to <see cref="Davinci"/>
 		/// </summary>
