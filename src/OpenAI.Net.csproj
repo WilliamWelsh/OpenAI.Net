@@ -4,15 +4,28 @@
     <AssemblyName>OpenAI.Net</AssemblyName>
     <RootNamespace>OpenAI</RootNamespace>
     <LangVersion>8.0</LangVersion>
-    <Description>OpenAI API Wrapper</Description>
+    <Description>An unofficial .NET API wrapper for OpenAI.</Description>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net461;netstandard2.0;netstandard2.1</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;netstandard2.1</TargetFrameworks>
+    <RepositoryUrl>https://github.com/WilliamWelsh/OpenAI.Net</RepositoryUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <Authors>William Welsh</Authors>
+    <Company />
+    <PackageTags>openai open ai wrapper openai.net</PackageTags>
+    <PackageReleaseNotes>An unofficial .NET API wrapper for OpenAI.</PackageReleaseNotes>
   </PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="System.Interactive.Async" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
 	</ItemGroup>
 
 </Project>
