@@ -100,10 +100,15 @@ namespace OpenAI
 		/// </summary>
 		public static Engine DavinciInstructBeta => new Engine("davinci-instruct-beta") { Owner = "openai", Ready = true };
 
-        /// <summary>
-        /// UNTESTED. Would love if someone with access to codex could test this for me. The codex version of <see cref="Davinci"/> engine.
-        /// </summary>
-        public static Engine DavinciCodex => new Engine("davinci-codex") { Owner = "openai", Ready = true };
+		/// <summary>
+		/// UNTESTED. Would love if someone with access to codex could test this for me. The codex version of <see cref="Davinci"/> engine. Most capable Codex model. Particularly good at translating natural language to code.
+		/// </summary>
+		public static Engine DavinciCodex => new Engine("davinci-codex") { Owner = "openai", Ready = true };
+
+		/// <summary>
+		/// UNTESTED. Would love if someone with access to codex could test this for me. Almost as capable as Davinci Codex, but slightly faster. This speed advantage may make it preferable for real-time applications.
+		/// </summary>
+		public static Engine CushmanCodex => new Engine("cushman-codex") { Owner = "openai", Ready = true };
 
 		/// <summary>
 		/// The default Engine to use in the case no other is specified.  Defaults to <see cref="Davinci"/>
