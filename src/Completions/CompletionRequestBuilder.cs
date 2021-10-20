@@ -1,4 +1,6 @@
-﻿namespace OpenAI
+﻿using System.Collections.Generic;
+
+namespace OpenAI
 {
     public class CompletionRequestBuilder
     {
@@ -19,6 +21,8 @@
         public int? Logprobs { get; set; }
 
         public bool? Echo { get; set; }
+
+        public List<string>? Stop { get; set; }
 
         /// <summary>
         /// The prompt(s) to generate completions for, encoded as a string, a list of strings, or a list of token lists.
@@ -110,11 +114,20 @@
         }
 
         /// <summary>
+        /// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
+        /// </summary>
+        public CompletionRequestBuilder WithStop(List<string> stop)
+        {
+            Stop = stop;
+            return this;
+        }
+
+        /// <summary>
         /// Build into a CompletionRequest
         /// </summary>
         public CompletionRequest Build()
         {
-            return new CompletionRequest(prompt: Prompt, max_tokens: MaxTokens, temperature: Temperature, top_p: TopP, presencePenalty: PresencePenalty, frequencyPenalty: FrequencyPenalty, numOutputs: NumChoicesPerPrompt, logProbs: Logprobs, echo: Echo);
+            return new CompletionRequest(prompt: Prompt, max_tokens: MaxTokens, temperature: Temperature, top_p: TopP, presencePenalty: PresencePenalty, frequencyPenalty: FrequencyPenalty, numOutputs: NumChoicesPerPrompt, logProbs: Logprobs, echo: Echo, stop: Stop);
         }
     }
 }

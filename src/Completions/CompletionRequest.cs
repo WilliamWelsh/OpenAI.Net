@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace OpenAI
@@ -97,20 +98,10 @@ namespace OpenAI
 		public bool? Echo { get; set; }
 
 		/// <summary>
-		/// This is only used for serializing the request into JSON, do not use it directly.
+		/// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
 		/// </summary>
 		[JsonProperty("stop")]
-		public object CompiledStop
-		{
-			get
-            {
-                if (MultipleStopSequences?.Length == 1)
-					return StopSequence;
-                if (MultipleStopSequences?.Length > 0)
-                    return MultipleStopSequences;
-                return null;
-            }
-		}
+		public List<string>? Stop { get; set; }
 
 		/// <summary>
 		/// One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
@@ -189,7 +180,7 @@ namespace OpenAI
 			double? frequencyPenalty = null,
 			int? logProbs = null,
 			bool? echo = null,
-			params string[] stopSequences)
+			List<string> stop = null)
 		{
 			this.Prompt = prompt;
 			this.MaxTokens = max_tokens;
@@ -200,7 +191,7 @@ namespace OpenAI
 			this.FrequencyPenalty = frequencyPenalty;
 			this.Logprobs = logProbs;
 			this.Echo = echo;
-			this.MultipleStopSequences = stopSequences;
+			this.Stop = stop;
 		}
     }
 
