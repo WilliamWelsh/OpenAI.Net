@@ -93,7 +93,7 @@ namespace OpenAI
         /// <summary>
         /// The most powerful, largest engine available, although the speed is quite slow.
         /// </summary>
-		public static Engine Davinci => new Engine("davinci") { Owner = "openai", Ready = true };
+		public static Engine Davinci => new Engine("text-davinci-002") { Owner = "openai", Ready = true };
 
 		/// <summary>
 		/// The instruct version of <see cref="Davinci"/> engine.
@@ -103,7 +103,7 @@ namespace OpenAI
 		/// <summary>
 		/// UNTESTED. Would love if someone with access to codex could test this for me. The codex version of <see cref="Davinci"/> engine. Most capable Codex model. Particularly good at translating natural language to code.
 		/// </summary>
-		public static Engine DavinciCodex => new Engine("davinci-codex") { Owner = "openai", Ready = true };
+		public static Engine DavinciCodex => new Engine("code-davinci-002") { Owner = "openai", Ready = true };
 
 		/// <summary>
 		/// UNTESTED. Would love if someone with access to codex could test this for me. Almost as capable as Davinci Codex, but slightly faster. This speed advantage may make it preferable for real-time applications.
