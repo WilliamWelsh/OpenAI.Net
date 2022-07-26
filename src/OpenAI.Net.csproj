@@ -13,7 +13,7 @@
     <Company />
     <PackageTags>openai open ai wrapper openai.net</PackageTags>
     <PackageReleaseNotes>Added davinci-instruct-beta, curie-instruct-beta, and untested codex models (davinci-codex and cushman-codex). Added WithStop to CompletionRequestBuilder</PackageReleaseNotes>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
 	<ItemGroup>
