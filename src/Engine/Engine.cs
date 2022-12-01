@@ -93,7 +93,7 @@ namespace OpenAI
         /// <summary>
         /// The most powerful, largest engine available, although the speed is quite slow.
         /// </summary>
-		public static Engine Davinci => new Engine("text-davinci-002") { Owner = "openai", Ready = true };
+		public static Engine Davinci => new Engine("text-davinci-003") { Owner = "openai", Ready = true };
 
 		/// <summary>
 		/// The instruct version of <see cref="Davinci"/> engine.
