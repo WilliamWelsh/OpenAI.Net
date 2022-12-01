@@ -55,6 +55,12 @@ namespace OpenAI
 		public double? Temperature { get; set; }
 
 		/// <summary>
+		/// The number of different completions to generate server-side before returning the "best" (the one with the highest log probability per token).
+		/// </summary>
+		[JsonProperty("best_of")]
+		public int? BestOf { get; set; }
+
+		/// <summary>
 		/// An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. It is generally recommend to use this or <see cref="Temperature"/> but not both.
 		/// </summary>
 		[JsonProperty("top_p")]
@@ -65,7 +71,6 @@ namespace OpenAI
 		/// </summary>
 		[JsonProperty("presence_penalty")]
 		public double? PresencePenalty { get; set; }
-
 
 		/// <summary>
 		/// The scale of the penalty for how often a token is used.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.
@@ -140,6 +145,7 @@ namespace OpenAI
 			this.MultiplePrompts = basedOn.MultiplePrompts;
 			this.MaxTokens = basedOn.MaxTokens;
 			this.Temperature = basedOn.Temperature;
+			this.BestOf = basedOn.BestOf;
 			this.TopP = basedOn.TopP;
 			this.NumChoicesPerPrompt = basedOn.NumChoicesPerPrompt;
 			this.PresencePenalty = basedOn.PresencePenalty;
@@ -170,7 +176,8 @@ namespace OpenAI
 		/// <param name="frequencyPenalty">The scale of the penalty for how often a token is used.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
 		/// <param name="logProbs">Include the log probabilities on the logprobs most likely tokens, which can be found in <see cref="CompletionResult.Choices"/> -> <see cref="Choice.Logprobs"/>. So for example, if logprobs is 10, the API will return a list of the 10 most likely tokens. If logprobs is supplied, the API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.</param>
 		/// <param name="echo">Echo back the prompt in addition to the completion.</param>
-		/// <param name="stopSequences">One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.</param>
+		/// <param name="stop">One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.</param>
+		/// <param name="best_of">How many different completions to generate server-side and before returning the "best" (the one with the highest log probability per token).</param>
 		public CompletionRequest(string prompt,
 			int? max_tokens = null,
 			double? temperature = null,
@@ -180,7 +187,8 @@ namespace OpenAI
 			double? frequencyPenalty = null,
 			int? logProbs = null,
 			bool? echo = null,
-			List<string> stop = null)
+			List<string> stop = null,
+			int? best_of = null)
 		{
 			this.Prompt = prompt;
 			this.MaxTokens = max_tokens;
@@ -192,6 +200,7 @@ namespace OpenAI
 			this.Logprobs = logProbs;
 			this.Echo = echo;
 			this.Stop = stop;
+			this.BestOf = best_of;
 		}
     }
 

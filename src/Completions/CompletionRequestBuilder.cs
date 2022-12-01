@@ -10,6 +10,8 @@ namespace OpenAI
 
         public double Temperature { get; set; }
 
+        public int? BestOf { get; set; }
+
         public double? TopP { get; set; }
 
         public double? PresencePenalty { get; set; }
@@ -50,6 +52,15 @@ namespace OpenAI
         public CompletionRequestBuilder WithTemperature(double temperature)
         {
             Temperature = temperature;
+            return this;
+        }
+
+        /// <summary>
+        /// How many different completions to generate server-side before returning the "best" (the one with the highest log probability per token).
+        /// </summary>
+        public CompletionRequestBuilder WithBestOf(int best_of)
+        {
+            BestOf = best_of;
             return this;
         }
 
@@ -127,7 +138,7 @@ namespace OpenAI
         /// </summary>
         public CompletionRequest Build()
         {
-            return new CompletionRequest(prompt: Prompt, max_tokens: MaxTokens, temperature: Temperature, top_p: TopP, presencePenalty: PresencePenalty, frequencyPenalty: FrequencyPenalty, numOutputs: NumChoicesPerPrompt, logProbs: Logprobs, echo: Echo, stop: Stop);
+            return new CompletionRequest(prompt: Prompt, max_tokens: MaxTokens, temperature: Temperature, top_p: TopP, presencePenalty: PresencePenalty, frequencyPenalty: FrequencyPenalty, numOutputs: NumChoicesPerPrompt, logProbs: Logprobs, echo: Echo, stop: Stop, best_of: BestOf);
         }
     }
 }
