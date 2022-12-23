@@ -87,21 +87,22 @@ namespace OpenAI
 			return CreateCompletionAsync(request);
 		}
 
-		/// <summary>
-		/// Ask the API to complete the prompt(s) using the specified parameters.  This is non-streaming, so it will wait until the API returns the full result.  Any non-specified parameters will fall back to default values specified in <see cref="DefaultCompletionRequestArgs"/> if present.
-		/// </summary>
-		/// <param name="prompt">The prompt to generate from</param>
-		/// <param name="max_tokens">How many tokens to complete to. Can return fewer if a stop sequence is hit.</param>
-		/// <param name="temperature">What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. It is generally recommend to use this or <paramref name="top_p"/> but not both.</param>
-		/// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. It is generally recommend to use this or <paramref name="temperature"/> but not both.</param>
-		/// <param name="numOutputs">How many different choices to request for each prompt.</param>
-		/// <param name="presencePenalty">The scale of the penalty applied if a token is already present at all.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
-		/// <param name="frequencyPenalty">The scale of the penalty for how often a token is used.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
-		/// <param name="logProbs">Include the log probabilities on the logprobs most likely tokens, which can be found in <see cref="CompletionResult.Choices"/> -> <see cref="Choice.Logprobs"/>. So for example, if logprobs is 10, the API will return a list of the 10 most likely tokens. If logprobs is supplied, the API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.</param>
-		/// <param name="echo">Echo back the prompt in addition to the completion.</param>
-		/// <param name="stopSequences">One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.</param>
-		/// <returns>Asynchronously returns the completion result.  Look in its <see cref="CompletionResult.Choices"/> property for the completions.</returns>
-		public Task<CompletionResult> CreateCompletionAsync(string prompt,
+        /// <summary>
+        /// Ask the API to complete the prompt(s) using the specified parameters.  This is non-streaming, so it will wait until the API returns the full result.  Any non-specified parameters will fall back to default values specified in <see cref="DefaultCompletionRequestArgs"/> if present.
+        /// </summary>
+        /// <param name="prompt">The prompt to generate from</param>
+        /// <param name="max_tokens">How many tokens to complete to. Can return fewer if a stop sequence is hit.</param>
+        /// <param name="temperature">What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. It is generally recommend to use this or <paramref name="top_p"/> but not both.</param>
+        /// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. It is generally recommend to use this or <paramref name="temperature"/> but not both.</param>
+        /// <param name="numOutputs">How many different choices to request for each prompt.</param>
+        /// <param name="presencePenalty">The scale of the penalty applied if a token is already present at all.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
+        /// <param name="frequencyPenalty">The scale of the penalty for how often a token is used.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
+        /// <param name="logProbs">Include the log probabilities on the logprobs most likely tokens, which can be found in <see cref="CompletionResult.Choices"/> -> <see cref="Choice.Logprobs"/>. So for example, if logprobs is 10, the API will return a list of the 10 most likely tokens. If logprobs is supplied, the API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.</param>
+        /// <param name="echo">Echo back the prompt in addition to the completion.</param>
+        /// <param name="user">A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.</param>
+        /// <param name="stopSequences">One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.</param>
+        /// <returns>Asynchronously returns the completion result.  Look in its <see cref="CompletionResult.Choices"/> property for the completions.</returns>
+        public Task<CompletionResult> CreateCompletionAsync(string prompt,
 			int? max_tokens = null,
 			double? temperature = null,
 			double? top_p = null,
@@ -110,6 +111,7 @@ namespace OpenAI
 			double? frequencyPenalty = null,
 			int? logProbs = null,
 			bool? echo = null,
+			string? user = null,
 			params string[] stopSequences
 			)
 		{
@@ -124,27 +126,29 @@ namespace OpenAI
 				FrequencyPenalty = frequencyPenalty ?? DefaultCompletionRequestArgs.FrequencyPenalty,
 				Logprobs = logProbs ?? DefaultCompletionRequestArgs.Logprobs,
 				Echo = echo ?? DefaultCompletionRequestArgs.Echo,
+				User = user ?? DefaultCompletionRequestArgs.User,
 				MultipleStopSequences = stopSequences ?? DefaultCompletionRequestArgs.MultipleStopSequences
 			};
 			return CreateCompletionAsync(request);
 		}
 
-		/// <summary>
-		/// Ask the API to complete the prompt(s) using the specified parameters.  This is non-streaming, so it will wait until the API returns the full result.  Any non-specified parameters will fall back to default values specified in <see cref="DefaultCompletionRequestArgs"/> if present.
-		/// </summary>
-		/// <param name="prompt">The prompt to generate from</param>
-		/// <param name="max_tokens">How many tokens to complete to. Can return fewer if a stop sequence is hit.</param>
-		/// <param name="temperature">What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. It is generally recommend to use this or <paramref name="top_p"/> but not both.</param>
-		/// <param name="best_of">How many different completions to generate server-side before returning the "best" (the one with the highest log probability per token).</param>
-		/// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. It is generally recommend to use this or <paramref name="temperature"/> but not both.</param>
-		/// <param name="numOutputs">How many different choices to request for each prompt.</param>
-		/// <param name="presencePenalty">The scale of the penalty applied if a token is already present at all.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
-		/// <param name="frequencyPenalty">The scale of the penalty for how often a token is used.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
-		/// <param name="logProbs">Include the log probabilities on the logprobs most likely tokens, which can be found in <see cref="CompletionResult.Choices"/> -> <see cref="Choice.Logprobs"/>. So for example, if logprobs is 10, the API will return a list of the 10 most likely tokens. If logprobs is supplied, the API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.</param>
-		/// <param name="echo">Echo back the prompt in addition to the completion.</param>
-		/// <param name="stopSequences">One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.</param>
-		/// <returns>Asynchronously returns the completion result.  Look in its <see cref="CompletionResult.Choices"/> property for the completions.</returns>
-		public Task<CompletionResult> CreateCompletionAsync(string prompt,
+        /// <summary>
+        /// Ask the API to complete the prompt(s) using the specified parameters.  This is non-streaming, so it will wait until the API returns the full result.  Any non-specified parameters will fall back to default values specified in <see cref="DefaultCompletionRequestArgs"/> if present.
+        /// </summary>
+        /// <param name="prompt">The prompt to generate from</param>
+        /// <param name="max_tokens">How many tokens to complete to. Can return fewer if a stop sequence is hit.</param>
+        /// <param name="temperature">What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. It is generally recommend to use this or <paramref name="top_p"/> but not both.</param>
+        /// <param name="best_of">How many different completions to generate server-side before returning the "best" (the one with the highest log probability per token).</param>
+        /// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. It is generally recommend to use this or <paramref name="temperature"/> but not both.</param>
+        /// <param name="numOutputs">How many different choices to request for each prompt.</param>
+        /// <param name="presencePenalty">The scale of the penalty applied if a token is already present at all.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
+        /// <param name="frequencyPenalty">The scale of the penalty for how often a token is used.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
+        /// <param name="logProbs">Include the log probabilities on the logprobs most likely tokens, which can be found in <see cref="CompletionResult.Choices"/> -> <see cref="Choice.Logprobs"/>. So for example, if logprobs is 10, the API will return a list of the 10 most likely tokens. If logprobs is supplied, the API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.</param>
+        /// <param name="echo">Echo back the prompt in addition to the completion.</param>
+        /// <param name="user">A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.</param>
+        /// <param name="stopSequences">One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.</param>
+        /// <returns>Asynchronously returns the completion result.  Look in its <see cref="CompletionResult.Choices"/> property for the completions.</returns>
+        public Task<CompletionResult> CreateCompletionAsync(string prompt,
 			int? max_tokens = null,
 			double? temperature = null,
 			int? best_of = null,
@@ -154,6 +158,7 @@ namespace OpenAI
 			double? frequencyPenalty = null,
 			int? logProbs = null,
 			bool? echo = null,
+			string? user = null,
 			params string[] stopSequences
 			)
 		{
@@ -169,6 +174,7 @@ namespace OpenAI
 				FrequencyPenalty = frequencyPenalty ?? DefaultCompletionRequestArgs.FrequencyPenalty,
 				Logprobs = logProbs ?? DefaultCompletionRequestArgs.Logprobs,
 				Echo = echo ?? DefaultCompletionRequestArgs.Echo,
+				User = user ?? DefaultCompletionRequestArgs.User,
 				MultipleStopSequences = stopSequences ?? DefaultCompletionRequestArgs.MultipleStopSequences
 			};
 			return CreateCompletionAsync(request);
@@ -330,23 +336,24 @@ namespace OpenAI
 			}
 		}
 
-		/// <summary>
-		/// Ask the API to complete the prompt(s) using the specified parameters. 
-		/// Any non-specified parameters will fall back to default values specified in <see cref="DefaultCompletionRequestArgs"/> if present.
-		/// If you are not using C# 8 supporting async enumerables or if you are using the .NET Framework, you may need to use <see cref="StreamCompletionAsync(CompletionRequest, Action{CompletionResult})"/> instead.
-		/// </summary>
-		/// <param name="prompt">The prompt to generate from</param>
-		/// <param name="max_tokens">How many tokens to complete to. Can return fewer if a stop sequence is hit.</param>
-		/// <param name="temperature">What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. It is generally recommend to use this or <paramref name="top_p"/> but not both.</param>
-		/// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. It is generally recommend to use this or <paramref name="temperature"/> but not both.</param>
-		/// <param name="numOutputs">How many different choices to request for each prompt.</param>
-		/// <param name="presencePenalty">The scale of the penalty applied if a token is already present at all.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
-		/// <param name="frequencyPenalty">The scale of the penalty for how often a token is used.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
-		/// <param name="logProbs">Include the log probabilities on the logprobs most likely tokens, which can be found in <see cref="CompletionResult.Choices"/> -> <see cref="Choice.Logprobs"/>. So for example, if logprobs is 10, the API will return a list of the 10 most likely tokens. If logprobs is supplied, the API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.</param>
-		/// <param name="echo">Echo back the prompt in addition to the completion.</param>
-		/// <param name="stopSequences">One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.</param>
-		/// <returns>An async enumerable with each of the results as they come in.  See <see href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#asynchronous-streams">the C# docs</see> for more details on how to consume an async enumerable.</returns>
-		public IAsyncEnumerable<CompletionResult> StreamCompletionEnumerableAsync(string prompt,
+        /// <summary>
+        /// Ask the API to complete the prompt(s) using the specified parameters. 
+        /// Any non-specified parameters will fall back to default values specified in <see cref="DefaultCompletionRequestArgs"/> if present.
+        /// If you are not using C# 8 supporting async enumerables or if you are using the .NET Framework, you may need to use <see cref="StreamCompletionAsync(CompletionRequest, Action{CompletionResult})"/> instead.
+        /// </summary>
+        /// <param name="prompt">The prompt to generate from</param>
+        /// <param name="max_tokens">How many tokens to complete to. Can return fewer if a stop sequence is hit.</param>
+        /// <param name="temperature">What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. It is generally recommend to use this or <paramref name="top_p"/> but not both.</param>
+        /// <param name="top_p">An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. It is generally recommend to use this or <paramref name="temperature"/> but not both.</param>
+        /// <param name="numOutputs">How many different choices to request for each prompt.</param>
+        /// <param name="presencePenalty">The scale of the penalty applied if a token is already present at all.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
+        /// <param name="frequencyPenalty">The scale of the penalty for how often a token is used.  Should generally be between 0 and 1, although negative numbers are allowed to encourage token reuse.</param>
+        /// <param name="logProbs">Include the log probabilities on the logprobs most likely tokens, which can be found in <see cref="CompletionResult.Choices"/> -> <see cref="Choice.Logprobs"/>. So for example, if logprobs is 10, the API will return a list of the 10 most likely tokens. If logprobs is supplied, the API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response.</param>
+        /// <param name="echo">Echo back the prompt in addition to the completion.</param>
+        /// <param name="user">A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.</param>
+        /// <param name="stopSequences">One or more sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.</param>
+        /// <returns>An async enumerable with each of the results as they come in.  See <see href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8#asynchronous-streams">the C# docs</see> for more details on how to consume an async enumerable.</returns>
+        public IAsyncEnumerable<CompletionResult> StreamCompletionEnumerableAsync(string prompt,
 			int? max_tokens = null,
 			double? temperature = null,
 			double? top_p = null,
@@ -355,6 +362,7 @@ namespace OpenAI
 			double? frequencyPenalty = null,
 			int? logProbs = null,
 			bool? echo = null,
+			string? user = null,
 			params string[] stopSequences)
 		{
             var request = new CompletionRequest(DefaultCompletionRequestArgs)
@@ -368,6 +376,7 @@ namespace OpenAI
 				FrequencyPenalty = frequencyPenalty ?? DefaultCompletionRequestArgs.FrequencyPenalty,
 				Logprobs = logProbs ?? DefaultCompletionRequestArgs.Logprobs,
 				Echo = echo ?? DefaultCompletionRequestArgs.Echo,
+				User = user ?? DefaultCompletionRequestArgs.User,
 				MultipleStopSequences = stopSequences ?? DefaultCompletionRequestArgs.MultipleStopSequences,
 				Stream = true
 			};

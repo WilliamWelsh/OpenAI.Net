@@ -24,6 +24,8 @@ namespace OpenAI
 
         public bool? Echo { get; set; }
 
+        public string? User { get; set; }
+
         public List<string>? Stop { get; set; }
 
         /// <summary>
@@ -125,6 +127,15 @@ namespace OpenAI
         }
 
         /// <summary>
+        /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse
+        /// </summary>
+        public CompletionRequestBuilder WithUser(string user)
+        {
+            User = user;
+            return this;
+        }
+
+        /// <summary>
         /// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
         /// </summary>
         public CompletionRequestBuilder WithStop(List<string> stop)
@@ -138,7 +149,7 @@ namespace OpenAI
         /// </summary>
         public CompletionRequest Build()
         {
-            return new CompletionRequest(prompt: Prompt, max_tokens: MaxTokens, temperature: Temperature, top_p: TopP, presencePenalty: PresencePenalty, frequencyPenalty: FrequencyPenalty, numOutputs: NumChoicesPerPrompt, logProbs: Logprobs, echo: Echo, stop: Stop, best_of: BestOf);
+            return new CompletionRequest(prompt: Prompt, max_tokens: MaxTokens, temperature: Temperature, top_p: TopP, presencePenalty: PresencePenalty, frequencyPenalty: FrequencyPenalty, numOutputs: NumChoicesPerPrompt, logProbs: Logprobs, echo: Echo, stop: Stop, best_of: BestOf, user: User);
         }
     }
 }

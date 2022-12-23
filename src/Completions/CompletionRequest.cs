@@ -102,10 +102,16 @@ namespace OpenAI
 		[JsonProperty("echo")]
 		public bool? Echo { get; set; }
 
-		/// <summary>
-		/// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
-		/// </summary>
-		[JsonProperty("stop")]
+        /// <summary>
+        /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse
+        /// </summary>
+        [JsonProperty("user")]
+        public string? User { get; set; }
+
+        /// <summary>
+        /// Up to 4 sequences where urther tokens. The returned text will not contain the stop sequence.
+        /// </summary>
+        [JsonProperty("stop")]
 		public List<string>? Stop { get; set; }
 
 		/// <summary>
@@ -152,6 +158,7 @@ namespace OpenAI
 			this.FrequencyPenalty = basedOn.FrequencyPenalty;
 			this.Logprobs = basedOn.Logprobs;
 			this.Echo = basedOn.Echo;
+			this.User = basedOn.User;
 			this.MultipleStopSequences = basedOn.MultipleStopSequences;
 		}
 
@@ -187,6 +194,7 @@ namespace OpenAI
 			double? frequencyPenalty = null,
 			int? logProbs = null,
 			bool? echo = null,
+			string? user = null,
 			List<string> stop = null,
 			int? best_of = null)
 		{
@@ -199,6 +207,7 @@ namespace OpenAI
 			this.FrequencyPenalty = frequencyPenalty;
 			this.Logprobs = logProbs;
 			this.Echo = echo;
+			this.User = user;
 			this.Stop = stop;
 			this.BestOf = best_of;
 		}
