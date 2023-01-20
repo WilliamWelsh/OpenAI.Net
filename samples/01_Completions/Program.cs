@@ -11,7 +11,7 @@ namespace _01_Completions
         public async Task MainAsync()
         {
             // Initialize the API
-            var api = new OpenAIAPI(apiKeys: "YOUR_API_KEY_HERE", engine: Engine.Davinci);
+            var api = new OpenAIAPI(apiKeys: "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", engine: Engine.Davinci);
 
             // Set up a search request
             // https://beta.openai.com/docs/api-reference/completions
