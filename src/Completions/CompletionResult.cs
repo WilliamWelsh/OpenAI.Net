@@ -41,6 +41,21 @@ namespace OpenAI
 			return Text;
 		}
 	}
+	
+	/// <summary>
+	/// Represents a used token result of the completion API call
+	/// </summary>
+	public class Usage
+	{
+		[JsonProperty("prompt_tokens")]
+		public int PromptTokens { get; set; }
+		
+		[JsonProperty("completion_tokens")]
+		public int CompletionTokens { get; set; }
+
+		[JsonProperty("total_tokens")]
+		public int TotalTokens { get; set; }
+	}
 
 	/// <summary>
 	/// Represents a result from calling the Completion API
@@ -92,6 +107,14 @@ namespace OpenAI
 		/// </summary>
 		[JsonIgnore]
 		public string RequestId { get; set; }
+		
+		
+		/// <summary>
+		/// Returns the number of tokens used
+		/// </summary>
+		[JsonProperty("usage")]
+		public Usage Usage { get; set; }
+		
 
 
 		/// <summary>
